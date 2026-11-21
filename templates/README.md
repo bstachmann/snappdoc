@@ -16,13 +16,23 @@ Include the shared System Context diagram from `purpose.md` using a `pymdownx.sn
 
 ## Quick Start
 
-Provide the minimal steps and commands to run or use this component locally.
+### Setup
+
+List the minimal prerequisites, secrets, configuration, and startup steps to get this component installed or running.
+
+> **Example:**
+>
+> 1. Create `secrets/meter_db_password.txt` (`chmod 600`) and set `METER_URL` in `.env`.
+> 2. Start with `podman-compose up --build -d postgres meter-svc`.
+
+### Usage
+
+Show how to call or use this component (minimal examples, CLI commands, or client collections).
 
 > **Example:**
 >
 > ```bash
-> podman-compose up --build -d postgres meter-svc
-> uv run pytest -v && uv run ruff check
+> curl -s http://localhost:8006/api/v1/status | jq
 > ```
 
 ## Documentation
@@ -35,7 +45,8 @@ Include only the sections that apply to this component (omit optional files—an
 - [Events](events.md) — *(optional)* Produced and consumed asynchronous events (omit if none).
 - [UI](ui.md) — *(optional)* User interfaces, views, and controls (omit for headless services and internal libraries).
 - [Database](db.md) — *(optional)* Owned database schema, migrations, and retention (omit if stateless).
-- [How to](usage.md) — Usage, setup, operation, and development.
+- [Operate](operate.md) — *(optional)* Runtime configuration, lifecycle, monitoring, and troubleshooting (omit for internal libraries without runtime operations).
+- [Develop](develop.md) — Local development setup, tests, linters, and contributor workflows.
 - [Architecture](architecture.md) — Solution strategy, components, runtime, deployment, concepts, risks, and decisions *(optional single-page arc42 view: [arc42](arc42.md))*.
 - [Glossary](glossary.md) — *(optional)* Domain and technical terms (omit if none).
 

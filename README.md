@@ -28,16 +28,17 @@ It applies the same small, consistent set of documentation files at the root of 
 Start with the [Authoring Guide](guide.md) for the full required-vs-optional matrix and conventions:
 
 - **Required**
-  - [Component Overview (`README.md`)](templates/README.md) — Summary, embedded System Context diagram, quick start, and links.
+  - [Component Overview (`README.md`)](templates/README.md) — Summary, embedded System Context diagram, quick start (setup & usage), and links.
   - [Purpose (`purpose.md`)](templates/purpose.md) — Implementation summary, goals, System Context diagram (single source of truth), and constraints.
   - [Functionality (`functionality.md`)](templates/functionality.md) — Use cases, domain objects, and non-functional requirements.
-  - [How to (`usage.md`)](templates/usage.md) — Usage, setup, operation, and local development instructions.
+  - [Develop (`develop.md`)](templates/develop.md) — Local development setup, tests, linters, and contributor workflows.
   - [Architecture (`architecture.md`)](templates/architecture.md) — Solution strategy, components, runtime flows, deployment, concepts, risks, and ADRs.
 - **Optional**
   - [API (`api.md`)](templates/api.md) — Exposed REST, HTTP, CLI, or library interfaces.
   - [Events (`events.md`)](templates/events.md) — Produced and consumed asynchronous events.
   - [UI (`ui.md`)](templates/ui.md) — User interfaces, routes, components, and interaction flows.
   - [Database (`db.md`)](templates/db.md) — Owned persistence stores, schemas, migrations, and retention.
+  - [Operate (`operate.md`)](templates/operate.md) — Runtime configuration, deployment lifecycle, monitoring, and troubleshooting.
   - [Topic Specification (`specs/topic-spec.md`)](templates/specs/topic-spec.md) — Modular single-topic requirements with `*Why:*` and `*Validated by:*` traces.
   - [Single-Page arc42 (`arc42.md`)](templates/arc42.md) — Assembles modular pages into the 12 standardized [arc42](https://arc42.org/) sections without duplicating prose.
   - [Glossary (`glossary.md`)](templates/glossary.md) — Domain and technical term definitions.

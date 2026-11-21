@@ -8,15 +8,16 @@ Only copy the template files that apply to a component. **Do not create empty or
 
 | Template File | Status | When to Include / Omit |
 | :--- | :--- | :--- |
-| `README.md` | **Required** | Overview, embedded System Context diagram, quick start, and links to the component's included docs. |
+| `README.md` | **Required** | Overview, embedded System Context diagram, quick start (setup & usage), and links to the component's included docs. |
 | `purpose.md` | **Required** | Purpose, goals, System Context diagram (single source of truth), and external constraints. |
 | `functionality.md` | **Required** | Consumer-facing capabilities, use cases, domain objects, and non-functional requirements. |
-| `usage.md` | **Required** | Usage, setup, operation, and local development instructions. |
+| `develop.md` | **Required** | Local development setup, running locally, tests, linters, and contributor workflows. |
 | `architecture.md` | **Required** | Solution strategy, components, runtime, deployment, cross-cutting concepts, risks, and architecture decisions. |
 | `api.md` | **Optional** | Include if the component exposes an interface (REST, HTTP routes, CLI, or library API); omit if none. |
 | `events.md` | **Optional** | Include if the component produces or consumes asynchronous events (message broker topics, webhooks, SSE); omit for synchronous-only components. |
 | `ui.md` | **Optional** | Include if the component provides a user interface (web views, CLI screens); omit for headless microservices and internal libraries. |
 | `db.md` | **Optional** | Include if the component owns a persistence store / database; omit for stateless components or libraries without owned tables. |
+| `operate.md` | **Optional** | Include if the component is deployed and operated at runtime (configuration, lifecycle, monitoring, troubleshooting); omit for internal libraries without runtime operations. |
 | `specs/*.md` | **Optional** | Include modular single-topic specifications (from `specs/topic-spec.md`) when the component has detailed testable requirements and validation traces beyond shared specs. |
 | `arc42.md` | **Optional** | Include only when a single-page arc42 architecture view is needed (typically top-level system documentation). |
 | `glossary.md` | **Optional** | Include when the component introduces domain or technical terms worth defining; omit if none. |
@@ -27,7 +28,7 @@ Only copy the template files that apply to a component. **Do not create empty or
 
 - Use clear, human-readable names in narrative sections (`purpose.md`, `functionality.md`, `architecture.md`) instead of literal code identifiers.
   > **Example:** `Queries GET /api/v1/status` → `Queries the system status`
-- Reserve concrete endpoints, payloads, event schemas, UI routes, database schemas, commands, and configuration keys for the applicable reference files (`api.md`, `events.md`, `ui.md`, `db.md`, `usage.md`, and `specs/*.md`).
+- Reserve concrete endpoints, payloads, event schemas, UI routes, database schemas, commands, and configuration keys for the applicable reference files (`api.md`, `events.md`, `ui.md`, `db.md`, `operate.md`, `develop.md`, and `specs/*.md`).
 
 ### Interface & Persistence Sections (`api.md`, `events.md`, `ui.md`, `db.md`)
 
@@ -39,7 +40,7 @@ Only copy the template files that apply to a component. **Do not create empty or
 - Split detailed requirements, validation traces (`*Validated by:*`), and technical constraints into small, single-topic files under `specs/` (see `specs/topic-spec.md`) rather than one monolithic `spec.md`.
 - Link every `*Validated by:*` test reference (and any code reference) directly to the actual test function, `describe` block, source file, or line number using a **relative repository path** (e.g., `../tests/test_<component>.py#L<line>`). Relative paths are clickable directly in the VS Code Markdown editor and on GitHub, and `scripts/zensical_repo_links.py` validates them locally and rewrites them to GitHub URLs when Zensical builds the static site.
 - Structure individual requirements and constraints inside each spec file as `###` subsections (under `##` topic headings) rather than top-level bullet lists so each requirement has a readable heading, table-of-contents entry, and deep-link anchor, followed by concise prose/sub-bullets and `*Why:*` / `*Validated by:*` metadata.
-- Link directly from narrative and reference sections (`functionality.md`, `architecture.md`, `api.md`, `events.md`, `ui.md`, `db.md`, `usage.md`) to the relevant `specs/<topic>.md` files wherever a use case, component, concept, contract, or operational rule is described.
+- Link directly from narrative and reference sections (`functionality.md`, `architecture.md`, `api.md`, `events.md`, `ui.md`, `db.md`, `operate.md`, `develop.md`) to the relevant `specs/<topic>.md` files wherever a use case, component, concept, contract, or operational rule is described.
 - In `zensical.toml`, nest each specification file beneath the documentation section it specifies so readers discover specs in context:
   - Under **Functionality** for use-case behavior, domain rules, and calculations.
   - Under **API**, **Events**, **UI**, or **Database** for concrete interface contracts, UI rules, or schema/migration constraints.
