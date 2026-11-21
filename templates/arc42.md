@@ -2,7 +2,7 @@
 
 > **Optional file:** Include `arc42.md` only when a single-page arc42 architecture view is needed (typically top-level system documentation). Omit it—and its entry in `README.md` and `zensical.toml`—otherwise.
 >
-> **Example:** `# Meter Service — Architecture (arc42)` with `--8<-- "services/meter-svc/purpose.md:overview"` (or omit `services/<component>/` for root docs, e.g. `--8<-- "purpose.md:overview"`).
+> **How to use:** Remove the surrounding backticks from each `--8<--` directive below and replace `services/<component>/` with your component path (or omit the prefix for root docs, e.g. `--8<-- "purpose.md:overview"`).
 
 This single-page architecture view follows the [arc42](https://arc42.org/) template—an open-source, pragmatic structure for documenting and communicating software and system architectures across 12 standardized sections. It assembles the modular documentation pages (`purpose.md`, `functionality.md`, `architecture.md`, and `glossary.md`) into one continuous reference without duplicating content.
 
@@ -10,52 +10,52 @@ This single-page architecture view follows the [arc42](https://arc42.org/) templ
 
 ## 1. Introduction and Goals
 
---8<-- "services/<component>/purpose.md:overview"
+`--8<-- "services/<component>/purpose.md:overview"`
 
---8<-- "services/<component>/functionality.md:use-cases"
+`--8<-- "services/<component>/functionality.md:use-cases"`
 
---8<-- "services/<component>/purpose.md:goals"
+`--8<-- "services/<component>/purpose.md:goals"`
 
 ## 2. Architecture Constraints
 
---8<-- "services/<component>/purpose.md:constraints"
+`--8<-- "services/<component>/purpose.md:constraints"`
 
 ## 3. Context and Scope
 
---8<-- "services/<component>/purpose.md:context-and-scope"
+`--8<-- "services/<component>/purpose.md:context-and-scope"`
 
 ## 4. Solution Strategy
 
---8<-- "services/<component>/architecture.md:solution-strategy"
+`--8<-- "services/<component>/architecture.md:solution-strategy"`
 
 ## 5. Building Block View
 
---8<-- "services/<component>/architecture.md:components"
+`--8<-- "services/<component>/architecture.md:components"`
 
 ## 6. Runtime View
 
---8<-- "services/<component>/architecture.md:runtime"
+`--8<-- "services/<component>/architecture.md:runtime"`
 
 ## 7. Deployment View
 
---8<-- "services/<component>/architecture.md:deployment"
+`--8<-- "services/<component>/architecture.md:deployment"`
 
 ## 8. Cross-cutting Concepts
 
---8<-- "services/<component>/architecture.md:concepts"
+`--8<-- "services/<component>/architecture.md:concepts"`
 
 ## 9. Architecture Decisions
 
---8<-- "services/<component>/architecture.md:architecture-decisions"
+`--8<-- "services/<component>/architecture.md:architecture-decisions"`
 
 ## 10. Quality Requirements
 
---8<-- "services/<component>/functionality.md:non-functional-requirements"
+`--8<-- "services/<component>/functionality.md:non-functional-requirements"`
 
 ## 11. Risks and Technical Debt
 
---8<-- "services/<component>/architecture.md:risks"
+`--8<-- "services/<component>/architecture.md:risks"`
 
 ## 12. Glossary
 
---8<-- "services/<component>/glossary.md:glossary"
+`--8<-- "services/<component>/glossary.md:glossary"`

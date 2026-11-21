@@ -6,11 +6,7 @@ Summarize what this component does and its role in the system (max 2–3 sentenc
 
 ## System Context
 
-Include the shared System Context diagram from `purpose.md` using a `pymdownx.snippets` reference so Overview and Purpose stay in sync from a single source:
-
-```markdown
---8<-- "services/<component>/purpose.md:system-context"
-```
+Include the shared System Context diagram from `purpose.md` using a `pymdownx.snippets` directive (`--8<-- "services/<component>/purpose.md:system-context"`) on its own line so Overview and Purpose stay in sync from a single source.
 
 > **Example:** `--8<-- "services/meter-svc/purpose.md:system-context"`
 

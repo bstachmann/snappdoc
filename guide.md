@@ -52,7 +52,7 @@ Only copy the template files that apply to a component. **Do not create empty or
   - ELK routes edges around boxes instead of drawing straight lines across them (avoiding the layout limitations of Mermaid's native `C4*` diagrams).
 - Always enclose this component's internal parts (and deployment nodes) in `subgraph` boundary boxes assigned the `c4Boundary` class.
 - Style nodes with standard C4 classes (`c4System`, `c4Container`, `c4Component`, `c4Db`, `c4External`) and short `<small>[Role]</small>` subtitles so diagrams stay readable and consistent across Zensical, GitHub, and VS Code.
-- **Share the System Context diagram from a single source:** Define it once in `purpose.md` wrapped in `<!-- --8<-- [start:system-context] -->` / `<!-- --8<-- [end:system-context] -->` snippet markers, and embed it in `README.md` (Overview) via `--8<-- "services/<service>/purpose.md:system-context"`.
+- **Share the System Context diagram from a single source:** Define it once in `purpose.md` wrapped in `<!-- --8<-- [start:<name>] -->` / `<!-- --8<-- [end:<name>] -->` snippet markers (using `system-context` as the section name), and embed it in `README.md` (Overview) via `--8<-- "services/<service>/purpose.md:system-context"`.
 - **Keep labels compact with line breaks:** Keep labels short, omit box descriptions, and for any label needing multiple words (nodes, edges, and sequence messages) insert `<br/>` line breaks to avoid wide labels and overlapping text.
 
 ### Single-Page arc42 View (`arc42.md`)

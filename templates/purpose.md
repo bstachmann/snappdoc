@@ -20,7 +20,7 @@ List a few key goals—preferably validatable or measurable.
 ## System Context
 
 <!-- --8<-- [start:context-and-scope] -->
-Add a C4-styled Mermaid `flowchart TB` diagram with ELK layout (`layout: elk`) and a `subgraph` boundary (`c4Boundary`) separating this component from external systems. Wrap the diagram in `<!-- --8<-- [start:system-context] -->` / `<!-- --8<-- [end:system-context] -->` snippet markers so `README.md` (Overview) can include it from this single source. Use short names with `<small>[Role]</small>` subtitles (`c4System`, `c4Db`, `c4External`), omit box descriptions, keep relationship labels short, and use `<br/>` line breaks for multi-word labels to prevent overlapping text.
+Add a C4-styled Mermaid `flowchart TB` diagram with ELK layout (`layout: elk`) and a `subgraph` boundary (`c4Boundary`) separating this component from external systems. Wrap the diagram in `<!-- --8<-- [start:<name>] -->` / `<!-- --8<-- [end:<name>] -->` snippet markers (using `system-context` as the section name) so `README.md` (Overview) can include it from this single source. Use short names with `<small>[Role]</small>` subtitles (`c4System`, `c4Db`, `c4External`), omit box descriptions, keep relationship labels short, and use `<br/>` line breaks for multi-word labels to prevent overlapping text.
 
 List one bullet point per interaction below the diagram.
 <!-- --8<-- [end:context-and-scope] -->

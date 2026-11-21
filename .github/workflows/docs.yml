@@ -5,8 +5,7 @@ on:
     branches:
       - main
     paths:
-      - "README.md"
-      - "guide.md"
+      - "*.md"
       - "templates/**"
       - "stylesheets/**"
       - "javascripts/**"
@@ -16,8 +15,7 @@ on:
     branches:
       - main
     paths:
-      - "README.md"
-      - "guide.md"
+      - "*.md"
       - "templates/**"
       - "stylesheets/**"
       - "javascripts/**"
