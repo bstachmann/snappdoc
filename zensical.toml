@@ -1,0 +1,89 @@
+[project]
+site_name = "snAPPdoc"
+site_description = "Simple Nested Application Documentation — modular Markdown templates for applications and components"
+docs_dir = "."
+site_dir = "site"
+# Note: Zensical ignores a top-level `templates/` folder by default; `!templates/`
+# and `!templates/**` explicitly opt it in so the templates are published on Pages.
+exclude_docs = """
+site/
+.git/
+.github/
+.venv/
+.vscode/
+.cache/
+.gitignore
+LICENSE
+zensical.toml
+*.toml
+*.yml
+*.yaml
+!templates/
+!templates/**
+"""
+extra_css = ["stylesheets/extra.css"]
+extra_javascript = ["javascripts/mermaid-config.js"]
+
+# Templates intentionally include illustrative placeholder links (e.g.,
+# `specs/status-caching.md`, `../<parent>.md`) that resolve once copied into a project.
+[project.validation]
+invalid_links = false
+
+nav = [
+  { "Overview" = "README.md" },
+  { "Authoring Guide" = "guide.md" },
+  { "Templates" = [
+    { "Component Overview (README)" = "templates/README.md" },
+    { "Purpose" = "templates/purpose.md" },
+    { "Functionality" = "templates/functionality.md" },
+    { "API (Optional)" = "templates/api.md" },
+    { "Events (Optional)" = "templates/events.md" },
+    { "UI (Optional)" = "templates/ui.md" },
+    { "Database (Optional)" = "templates/db.md" },
+    { "How to (Usage)" = "templates/usage.md" },
+    { "Architecture" = "templates/architecture.md" },
+    { "Single-Page arc42 (Optional)" = "templates/arc42.md" },
+    { "Glossary (Optional)" = "templates/glossary.md" },
+    { "Topic Specification (Optional)" = "templates/specs/topic-spec.md" },
+  ] },
+]
+
+[project.theme]
+language = "en"
+features = [
+  "navigation.instant",
+  "navigation.tracking",
+  "navigation.top",
+  "navigation.footer",
+  "search.highlight",
+  "content.code.copy",
+]
+
+[[project.theme.palette]]
+media = "(prefers-color-scheme: light)"
+scheme = "default"
+primary = "teal"
+accent = "amber"
+toggle.icon = "material/brightness-7"
+toggle.name = "Switch to dark mode"
+
+[[project.theme.palette]]
+media = "(prefers-color-scheme: dark)"
+scheme = "slate"
+primary = "teal"
+accent = "amber"
+toggle.icon = "material/brightness-4"
+toggle.name = "Switch to light mode"
+
+[project.markdown_extensions]
+admonition = {}
+attr_list = {}
+def_list = {}
+tables = {}
+toc.permalink = true
+pymdownx.details = {}
+pymdownx.highlight.anchor_linenums = true
+pymdownx.inlinehilite = {}
+pymdownx.superfences.custom_fences = [
+  { name = "mermaid", class = "mermaid", format = "pymdownx.superfences.fence_code_format" },
+]

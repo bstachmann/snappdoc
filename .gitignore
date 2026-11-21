@@ -1,0 +1,12 @@
+# Zensical build output & cache
+site/
+.cache/
+
+# Python / local tooling
+.venv/
+__pycache__/
+*.py[cod]
+
+# Editor / OS
+.vscode/
+.DS_Store
