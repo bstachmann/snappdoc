@@ -31,7 +31,7 @@ zensical build --clean --strict
 
 ## Documentation
 
-snAPPdoc applies its own modular documentation structure to itself (omitting non-applicable optional files `api.md`, `events.md`, `ui.md`, `db.md`, and `specs/`):
+snAPPdoc applies its own modular documentation structure to itself (omitting non-applicable optional files `api.md`, `events.md`, `ui.md`, `db.md`, `emergency.md`, `compliance.md`, `stakeholders.md`, `team.md`, `legacy.md`, and the `specs/`, `runbooks/`, `concepts/`, and `adr/` directories):
 
 - [Purpose](purpose.md) — Overview, goals, system context, and external constraints.
 - [Functionality](functionality.md) — Use cases, domain objects, and non-functional requirements.
@@ -55,10 +55,18 @@ Start with the [Authoring Guide](guide.md) for the full required-vs-optional mat
   - [Events (`events.md`)](templates/events.md) — Produced and consumed asynchronous events.
   - [UI (`ui.md`)](templates/ui.md) — User interfaces, routes, components, and interaction flows.
   - [Database (`db.md`)](templates/db.md) — Owned persistence stores, schemas, migrations, and retention.
-  - [Operate (`operate.md`)](templates/operate.md) — Runtime configuration, deployment lifecycle, monitoring, and troubleshooting.
+  - [Operate (`operate.md`)](templates/operate.md) — Runtime configuration, access, deployment lifecycle, monitoring, maintenance, troubleshooting, and runbook index.
+  - [Runbook (`runbooks/runbook.md`)](templates/runbooks/runbook.md) — Single multi-step procedure with roles, verified steps, rollback, and escalation.
+  - [Emergency (`emergency.md`)](templates/emergency.md) — System-level emergency procedures, contacts, vendor support, and emergency access.
   - [Topic Specification (`specs/topic-spec.md`)](templates/specs/topic-spec.md) — Modular single-topic requirements with `*Why:*` and `*Validated by:*` traces.
+  - [Concept (`concepts/concept.md`)](templates/concepts/concept.md) — Detailed cross-cutting concept summarized in `architecture.md`.
+  - [Decision Record (`adr/NNNN-decision.md`)](templates/adr/NNNN-decision.md) — Significant architecture decision with context, alternatives, and consequences.
   - [Single-Page arc42 (`arc42.md`)](templates/arc42.md) — Assembles modular pages into the 12 standardized [arc42](https://arc42.org/) sections without duplicating prose.
   - [Glossary (`glossary.md`)](templates/glossary.md) — Domain and technical term definitions.
+  - [Compliance (`compliance.md`)](templates/compliance.md) — Applicable policies, requirement traceability, exceptions, and audit evidence.
+  - [Stakeholders (`stakeholders.md`)](templates/stakeholders.md) — Stakeholders and integration partners, contacts, outage impact, and change coordination.
+  - [Team (`team.md`)](templates/team.md) — Roles, RACI, component ownership, duty roles, and way of working.
+  - [Legacy Systems (`legacy.md`)](templates/legacy.md) — Decommissioned predecessor systems and their archived data.
 
 ## License & Attribution
 

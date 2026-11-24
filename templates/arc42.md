@@ -2,7 +2,7 @@
 
 > **Optional file:** Include `arc42.md` only when a single-page arc42 architecture view is needed (typically top-level system documentation). Omit it—and its entry in `README.md` and `zensical.toml`—otherwise.
 >
-> **How to use:** Remove the surrounding backticks from each `--8<--` directive below and replace `services/<component>/` with your component path (or omit the prefix for root docs, e.g. `--8<-- "purpose.md:overview"`).
+> **How to use:** Remove the surrounding backticks from each `--8<--` directive below and replace `services/<component>/` with your component path (or omit the prefix for root docs, e.g. `--8<-- "purpose.md:overview"`). Remove the *Target Architecture & Roadmap* subheading and its include if `architecture.md` omits that optional section, since missing snippet sections fail strict builds.
 
 This single-page architecture view follows the [arc42](https://arc42.org/) template—an open-source, pragmatic structure for documenting and communicating software and system architectures across 12 standardized sections. It assembles the modular documentation pages (`purpose.md`, `functionality.md`, `architecture.md`, and `glossary.md`) into one continuous reference without duplicating content.
 
@@ -55,6 +55,10 @@ This single-page architecture view follows the [arc42](https://arc42.org/) templ
 ## 11. Risks and Technical Debt
 
 `--8<-- "services/<component>/architecture.md:risks"`
+
+### Target Architecture & Roadmap
+
+`--8<-- "services/<component>/architecture.md:target-architecture"`
 
 ## 12. Glossary
 

@@ -8,7 +8,7 @@ Only copy the template files that apply to a component. **Do not create empty or
 
 | Template File | Status | When to Include / Omit |
 | :--- | :--- | :--- |
-| `README.md` | **Required** | Overview, embedded System Context diagram, quick start (setup & usage), and links to the component's included docs. |
+| `README.md` | **Required** | Overview, embedded System Context diagram, quick start (setup & usage), optional nested Components table, and links to the component's included docs. |
 | `purpose.md` | **Required** | Purpose, goals, System Context diagram (single source of truth), and external constraints. |
 | `functionality.md` | **Required** | Consumer-facing capabilities, use cases, domain objects, and non-functional requirements. |
 | `develop.md` | **Required** | Local development setup, running locally, tests, linters, and contributor workflows. |
@@ -17,10 +17,18 @@ Only copy the template files that apply to a component. **Do not create empty or
 | `events.md` | **Optional** | Include if the component produces or consumes asynchronous events (message broker topics, webhooks, SSE); omit for synchronous-only components. |
 | `ui.md` | **Optional** | Include if the component provides a user interface (web views, CLI screens); omit for headless microservices and internal libraries. |
 | `db.md` | **Optional** | Include if the component owns a persistence store / database; omit for stateless components or libraries without owned tables. |
-| `operate.md` | **Optional** | Include if the component is deployed and operated at runtime (configuration, lifecycle, monitoring, troubleshooting); omit for internal libraries without runtime operations. |
+| `operate.md` | **Optional** | Include if the component is deployed and operated at runtime (configuration, access, lifecycle, monitoring, maintenance, troubleshooting, runbook index); omit for internal libraries without runtime operations. |
+| `runbooks/*.md` | **Optional** | Include one file per multi-step procedure (from `runbooks/runbook.md`) for recurring maintenance, recovery, initial setup, or emergencies; index them in `operate.md`. |
+| `emergency.md` | **Optional** | Include at the system root when the system runs in production with on-call, escalation, or vendor support; link it prominently from the root `README.md`. |
 | `specs/*.md` | **Optional** | Include modular single-topic specifications (from `specs/topic-spec.md`) when the component has detailed testable requirements and validation traces beyond shared specs. |
+| `concepts/*.md` | **Optional** | Include one file per cross-cutting concept (from `concepts/concept.md`) that needs more than a short subsection in `architecture.md`. |
+| `adr/*.md` | **Optional** | Include one record per significant decision (from `adr/NNNN-decision.md`) that is costly to reverse, needed external approval, or involved evaluating alternatives. |
 | `arc42.md` | **Optional** | Include only when a single-page arc42 architecture view is needed (typically top-level system documentation). |
 | `glossary.md` | **Optional** | Include when the component introduces domain or technical terms worth defining; omit if none. |
+| `compliance.md` | **Optional** | Include (typically at the system root) when the system must demonstrably satisfy external policies, standards, or regulations. |
+| `stakeholders.md` | **Optional** | Include (typically at the system root) when readers need stakeholder contacts, outage impact, or change coordination beyond the System Context in `purpose.md`. |
+| `team.md` | **Optional** | Include at the system root when several people or roles share responsibility (roles, RACI, component ownership, duty roles, way of working). |
+| `legacy.md` | **Optional** | Include when decommissioned predecessor systems left archived data, backups, or knowledge that must remain accessible. |
 
 ## Authoring Guidelines
 
@@ -28,7 +36,27 @@ Only copy the template files that apply to a component. **Do not create empty or
 
 - Use clear, human-readable names in narrative sections (`purpose.md`, `functionality.md`, `architecture.md`) instead of literal code identifiers.
   > **Example:** `Queries GET /api/v1/status` → `Queries the system status`
-- Reserve concrete endpoints, payloads, event schemas, UI routes, database schemas, commands, and configuration keys for the applicable reference files (`api.md`, `events.md`, `ui.md`, `db.md`, `operate.md`, `develop.md`, and `specs/*.md`).
+- Reserve concrete endpoints, payloads, event schemas, UI routes, database schemas, commands, and configuration keys for the applicable reference files (`api.md`, `events.md`, `ui.md`, `db.md`, `operate.md`, `develop.md`, `runbooks/*.md`, and `specs/*.md`).
+
+### System-Level Files (`emergency.md`, `team.md`, `stakeholders.md`, `compliance.md`, `legacy.md`)
+
+- These files usually exist **once at the system root**; nested components link to them instead of duplicating content.
+- Nested components **must not** create `emergency.md` or `team.md` unless they are operated or owned independently of the system root.
+- A system root or grouping `README.md` lists its nested components in the optional **Components** section. Component owners are maintained only in `team.md` (**Component Ownership**).
+- Never commit credentials, and keep personal data to a minimum: prefer roles, shared on-call numbers, team channels, and functional mailboxes. Link access-controlled stores (password managers, internal wikis) for anything else.
+
+### Runbooks (`runbooks/`)
+
+- Create one file per procedure (from `runbooks/runbook.md`). Use runbooks for multi-step procedures that must be followed exactly; keep short symptom → fix hints in `operate.md` (**Troubleshooting**).
+- Number every step, keep one action per step, and follow each with a *Verify:* line. State trigger, frequency, owner, and last-tested date, and describe rollback and escalation.
+- Index every runbook in `operate.md` (**Runbooks**); list recurring ones also in `operate.md` (**Maintenance**) with their frequency. Link runbooks from `emergency.md` (emergency procedures) and from the duty-role checklists in `team.md` instead of copying steps.
+
+### Concepts & Decision Records (`concepts/`, `adr/`)
+
+- Keep `architecture.md` (**Concepts** and **Architecture Decisions**) as the complete index so the single-page `arc42.md` view stays complete. Each entry is a short summary; detailed concepts move to `concepts/<topic>.md` and significant decisions to `adr/NNNN-<title>.md`, linked from the summary.
+- Concept pages explain *how and why* a cross-cutting solution works; testable requirements belong in `specs/`.
+- Decision records are an archive: readers must not need them to understand the current system, so the outcome of each decision must also appear in the section it affects. Do not rewrite accepted records; supersede them with a new record and update the status of both.
+- Describe the current state in all architecture sections; planned changes go only into `architecture.md` (**Target Architecture & Roadmap**).
 
 ### Interface & Persistence Sections (`api.md`, `events.md`, `ui.md`, `db.md`)
 
@@ -58,5 +86,5 @@ Only copy the template files that apply to a component. **Do not create empty or
 ### Single-Page arc42 View (`arc42.md`)
 
 - When a single-document architecture view following the 12 numbered **arc42** headings is required, copy `templates/arc42.md` (adjusting `services/<component>/` to root-relative filenames such as `purpose.md:overview` for top-level project documentation).
-- Beyond the short arc42 introduction and CC BY-SA 4.0 attribution notice at the top, `arc42.md` must contain **only the numbered arc42 headings and `pymdownx.snippets` (`--8<--`) include directives**—no standalone architecture prose of its own—so all content remains maintained in a single source of truth across `purpose.md`, `functionality.md`, `architecture.md`, and `glossary.md`.
-- Preserve the named `<!-- --8<-- [start:...] -->` / `<!-- --8<-- [end:...] -->` markers defined in the templates (`overview`, `goals`, `context-and-scope`, `constraints`, `use-cases`, `non-functional-requirements`, `solution-strategy`, `components`, `runtime`, `deployment`, `concepts`, `risks`, `architecture-decisions`, `glossary`), and use explicit file paths on cross-section links (e.g., `architecture.md#architecture-decisions` instead of `#architecture-decisions`) so links remain valid in both the modular pages and `arc42.md`.
+- Beyond the short arc42 introduction and CC BY-SA 4.0 attribution notice at the top, `arc42.md` must contain **only the numbered arc42 headings and `pymdownx.snippets` (`--8<--`) include directives** (plus the optional *Target Architecture & Roadmap* subheading under section 11)—no standalone architecture prose of its own—so all content remains maintained in a single source of truth across `purpose.md`, `functionality.md`, `architecture.md`, and `glossary.md`.
+- Preserve the named `<!-- --8<-- [start:...] -->` / `<!-- --8<-- [end:...] -->` markers defined in the templates (`overview`, `goals`, `context-and-scope`, `constraints`, `use-cases`, `non-functional-requirements`, `solution-strategy`, `components`, `runtime`, `deployment`, `concepts`, `risks`, `target-architecture` (optional), `architecture-decisions`, `glossary`), and use explicit file paths on cross-section links (e.g., `architecture.md#architecture-decisions` instead of `#architecture-decisions`) so links remain valid in both the modular pages and `arc42.md`.

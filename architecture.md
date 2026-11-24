@@ -7,7 +7,7 @@ snAPPdoc combines a static collection of modular Markdown templates with a light
 <!-- --8<-- [start:solution-strategy] -->
 Keep documentation authoring strictly in plain Markdown while elevating visual presentation and cross-page reuse through standard Zensical extensions and a drop-in CSS/JS layer.
 
-- **Modular templates with strict optionality:** Provide 5 required templates and 8 optional templates so every component stays uniform without empty stub pages.
+- **Modular templates with strict optionality:** Provide 5 required templates and 16 optional templates so every component stays uniform without empty stub pages.
 - **Build-time single-source assembly:** Use `pymdownx.snippets` markers (`--8<--`) to share the System Context diagram (`purpose.md` → `README.md`) and compile `arc42.md` from modular pages without duplicating prose.
 - **ELK-backed C4 diagrams:** Standardize on Mermaid `flowchart TB` with ELK layout and reusable C4 classes instead of Mermaid's native `C4*` diagrams for cleaner edge routing.
 - **Closed Shadow DOM interception:** Patch `window.mermaid` before Zensical initializes it so custom C4 CSS, font synchronization, wrapping widths, and arrowhead scaling apply inside Zensical's closed Shadow DOM.
@@ -52,7 +52,7 @@ flowchart TB
 
 - **Root snAPPdoc Docs** ([`README.md`](README.md), [`purpose.md`](purpose.md), [`functionality.md`](functionality.md), [`operate.md`](operate.md), [`develop.md`](develop.md), [`architecture.md`](architecture.md), [`arc42.md`](arc42.md), [`glossary.md`](glossary.md)): Apply snAPPdoc recursively to itself as both project documentation and a live reference implementation.
 - **Authoring Guide** ([`guide.md`](guide.md)): Defines the required-vs-optional matrix, writing style, modular `specs/` conventions, C4 diagram standards, and arc42 assembly rules.
-- **Markdown Templates** ([`templates/`](templates/README.md)): Thirteen copy-ready blueprints (5 required, 8 optional including [`specs/topic-spec.md`](templates/specs/topic-spec.md)) with inline blockquote examples and snippet markers.
+- **Markdown Templates** ([`templates/`](templates/README.md)): Twenty-one copy-ready blueprints (5 required, 16 optional including the single-topic directory templates [`specs/topic-spec.md`](templates/specs/topic-spec.md), [`runbooks/runbook.md`](templates/runbooks/runbook.md), [`concepts/concept.md`](templates/concepts/concept.md), and [`adr/NNNN-decision.md`](templates/adr/NNNN-decision.md)) with inline blockquote examples and snippet markers.
 - **Zensical Config** ([`zensical.toml`](zensical.toml)): Configures site navigation, Material light/dark palettes, `exclude_docs` (including `!templates/`), Markdown extensions (`pymdownx.snippets`, `pymdownx.superfences`), and custom static assets.
 - **Viewport & Contrast Stylesheet** ([`stylesheets/extra.css`](stylesheets/extra.css)): Expands `.md-grid` to full viewport width and aligns Mermaid edge/label colors with active theme foreground tokens.
 - **Mermaid Shadow DOM Patcher** ([`javascripts/mermaid-config.js`](javascripts/mermaid-config.js)): Intercepts `window.mermaid` via `Object.defineProperty`, injects C4 `themeCSS`, synchronizes layout fonts and wrapping widths (`400px`), waits for web fonts before rendering, and scales `userSpaceOnUse` SVG `<marker>` arrowheads by `1.5×`.
@@ -142,7 +142,7 @@ Zensical isolates rendered Mermaid SVGs inside a closed Shadow DOM, preventing e
 
 ### Nested Consistency & Optional Omission
 
-The same file taxonomy applies at the repository root and recursively inside every component directory (`services/<name>/`, `libs/<name>/`). Only the 5 core files are mandatory; optional files (`api.md`, `events.md`, `ui.md`, `db.md`, `operate.md`, `specs/*.md`, `arc42.md`, `glossary.md`) are copied only when applicable and omitted completely—including from `README.md` and `zensical.toml`—when not needed.
+The same file taxonomy applies at the repository root and recursively inside every component directory (`services/<name>/`, `libs/<name>/`). Only the 5 core files are mandatory; optional files (`api.md`, `events.md`, `ui.md`, `db.md`, `operate.md`, `runbooks/*.md`, `emergency.md`, `specs/*.md`, `concepts/*.md`, `adr/*.md`, `arc42.md`, `glossary.md`, `compliance.md`, `stakeholders.md`, `team.md`, `legacy.md`) are copied only when applicable and omitted completely—including from `README.md` and `zensical.toml`—when not needed. System-level files (`emergency.md`, `team.md`, `stakeholders.md`, `compliance.md`, `legacy.md`) usually live once at the system root and are linked, not duplicated, by nested components.
 
 ### Dual Readability
 
@@ -165,6 +165,7 @@ Templates avoid custom syntax beyond standard Markdown, Mermaid fences, and HTML
 - **Mermaid `flowchart TB` with ELK layout over native Mermaid `C4*` diagrams:** ELK routes edges cleanly around boundary boxes and prevents overlapping labels, while custom `classDef` classes (`c4System`, `c4Container`, `c4Component`, `c4Db`, `c4External`, `c4Boundary`) retain C4 visual semantics.
 - **Snippet-based assembly (`pymdownx.snippets`) over duplicated prose:** Lets teams maintain modular component pages day-to-day while still producing an up-to-date single-page [arc42](arc42.md) deliverable and keeping `README.md` diagrams synchronized with `purpose.md`.
 - **Vanilla ES5 `window.mermaid` interception over custom Zensical fork or bundler:** Works around Zensical's closed Shadow DOM without requiring Node.js, npm packages, or maintaining a forked static site generator.
-- **Omit non-applicable optional files instead of stubbing:** Prevents documentation rot and reader noise by forbidding empty *"Not applicable"* files—demonstrated in snAPPdoc itself by omitting `api.md`, `events.md`, `ui.md`, `db.md`, and `specs/`.
+- **Omit non-applicable optional files instead of stubbing:** Prevents documentation rot and reader noise by forbidding empty *"Not applicable"* files—demonstrated in snAPPdoc itself by omitting `api.md`, `events.md`, `ui.md`, `db.md`, the system-level files, and the `specs/`, `runbooks/`, `concepts/`, and `adr/` directories.
+- **Detail directories linked from index sections over longer core pages:** Runbooks, concepts, and decision records live in single-topic files under `runbooks/`, `concepts/`, and `adr/`, while `operate.md` and `architecture.md` keep short summaries with links. This keeps core pages scannable and the `arc42.md` view complete without inlining long documents.
 - **Publish `templates/` alongside live docs with `invalid_links = false` and `check_paths = true`:** Allows visitors to browse the raw template blueprints directly on the snAPPdoc Pages site while still enforcing build-time validation of every live `pymdownx.snippets` include in `README.md` and `arc42.md`.
 <!-- --8<-- [end:architecture-decisions] -->

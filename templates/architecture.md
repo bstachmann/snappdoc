@@ -113,7 +113,7 @@ Add a C4-styled Mermaid `flowchart TB` diagram with ELK layout (`layout: elk`) s
 ## Concepts
 
 <!-- --8<-- [start:concepts] -->
-Add a short subsection for each relevant cross-cutting concept (e.g., caching, error handling, logging, security, i18n, data quality, testing).
+Add a short subsection for each relevant cross-cutting concept (e.g., caching, error handling, logging, security, i18n, data quality, testing). When a concept needs more than a few paragraphs, move the details to `concepts/<topic>.md` (see `concepts/concept.md` template) and keep a 1–2 sentence summary with a link here.
 <!-- --8<-- [end:concepts] -->
 
 > **Example:**
@@ -121,6 +121,10 @@ Add a short subsection for each relevant cross-cutting concept (e.g., caching, e
 > ### Error Handling
 >
 > Upstream HTTP failures mark `/api/v1/diagnostics` as `degraded` and return HTTP `502`.
+>
+> ### Authentication
+>
+> All services validate short-lived tokens from the identity provider. See [Authentication](concepts/authentication.md).
 
 ## Risks
 
@@ -132,12 +136,23 @@ Numbered list of risks ordered by importance (`harm × likelihood`), including m
 >
 > 1. **Meter Wi-Fi dropouts (Medium × Medium):** *Mitigation:* 5-second HTTP timeout, degraded health state, and static LAN IP recommendation.
 
+## Target Architecture & Roadmap
+
+<!-- --8<-- [start:target-architecture] -->
+*(Optional)* Describe the intended target architecture and the migration path when it differs significantly from the current one. All other sections describe the *current* state. Omit this section (and its include in `arc42.md`) if no change is planned.
+<!-- --8<-- [end:target-architecture] -->
+
+> **Example:** Replace polling with the meter's upcoming push API.
+>
+> 1. **Q1:** Subscribe to push events in parallel with polling and compare readings.
+> 2. **Q2:** Remove polling and the 1-minute cache once push delivery is reliable.
+
 ## Architecture Decisions
 
 <!-- --8<-- [start:architecture-decisions] -->
-List component-specific architecture decisions and their rationale.
+List component-specific architecture decisions and their rationale. For decisions that need context, alternatives, and consequences, create a record under `adr/` (see `adr/NNNN-decision.md` template) and keep a one-line summary with a link here.
 <!-- --8<-- [end:architecture-decisions] -->
 
 > **Example:**
 >
-> - **1-Minute DB Cache over Direct Pass-Through:** Shields the smart meter from bursty dashboard reads while keeping the container stateless.
+> - **1-Minute DB Cache over Direct Pass-Through:** Shields the smart meter from bursty dashboard reads while keeping the container stateless ([ADR-0001](adr/0001-db-cache.md)).
